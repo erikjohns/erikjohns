@@ -1,4 +1,6 @@
-## Hi there 👋
+## Hey there, I'm Erik Johns 👋
+
+I am currently a _senior_ in _Computer Science_ at **Montana State University**
 
 <!--
 **erikjohns/erikjohns** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

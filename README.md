@@ -1,6 +1,6 @@
 ## Hey there, I'm Erik Johns 👋
 
-🎓 I am currently studying Computer Science at Montana State University and will be graduating in May 2025.
+Hey there, I'm **Erik Johns**, a student at **Montana State University, College of Engineering**. I'll be graduating in May of 2025 with a **B.S. Computer Science** degree. 
 
 <!--
 **erikjohns/erikjohns** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

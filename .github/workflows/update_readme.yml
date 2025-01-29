@@ -3,7 +3,7 @@ name: Update Graduation Countdown
 on:
   schedule:
     - cron: "0 0 * * *"
-  workflow_dispatch:
+  workflow_dispatch: 
 
 jobs:
   update-readme:
@@ -14,18 +14,24 @@ jobs:
 
       - name: Calculate days until graduation
         run: |
-          GRAD_DATE="2025-05-09"
+          GRAD_DATE="2025-05-10"
           TODAY=$(date +"%Y-%m-%d")
           DAYS_LEFT=$(( ( $(date -d $GRAD_DATE +%s) - $(date -d $TODAY +%s) ) / 86400 ))
           echo "DAYS_LEFT=$DAYS_LEFT" >> $GITHUB_ENV
 
       - name: Update README
         run: |
-          sed -i "s/🗓️ [0-9]\+ days left/🗓️ $DAYS_LEFT days left/" README.md
+          # Ensure the placeholder exists before replacing
+          if grep -q "🗓️ [0-9]\+ Days Left" README.md; then
+            sed -i "s/🗓️ [0-9]\+ Days Left/🗓️ $DAYS_LEFT Days Left/" README.md
+          else
+            echo "**⏳ Countdown to Graduation**: \n🗓️ $DAYS_LEFT Days Left" >> README.md
+          fi
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -am "Update graduation countdown ($DAYS_LEFT days left)"
-          git push
+          git add README.md
+          git commit -m "Update graduation countdown ($DAYS_LEFT Days Left)" || echo "No changes to commit"
+          git push || echo "No changes to push"

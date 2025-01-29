@@ -1,0 +1,31 @@
+name: Update Graduation Countdown
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Calculate days until graduation
+        run: |
+          GRAD_DATE="2025-05-09"
+          TODAY=$(date +"%Y-%m-%d")
+          DAYS_LEFT=$(( ( $(date -d $GRAD_DATE +%s) - $(date -d $TODAY +%s) ) / 86400 ))
+          echo "DAYS_LEFT=$DAYS_LEFT" >> $GITHUB_ENV
+
+      - name: Update README
+        run: |
+          sed -i "s/🗓️ [0-9]\+ days left/🗓️ $DAYS_LEFT days left/" README.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update graduation countdown ($DAYS_LEFT days left)"
+          git push

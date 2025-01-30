@@ -2,8 +2,7 @@
 
 👋 Hey there, I'm **Erik Johns**, a student at **Montana State University, College of Engineering**. I'll be graduating in May of 2025 with a **B.S. Computer Science** degree 🎓.
 
-**⏳ Countdown to Graduation**: 
-🗓️ XX Days Left
+**⏳ Countdown to Graduation:** 🗓️ XX Days Left
 
 ---
 ### 📓 Relevant Coursework
@@ -43,4 +42,3 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-**⏳ Countdown to Graduation**: \n🗓️ 101 Days Left

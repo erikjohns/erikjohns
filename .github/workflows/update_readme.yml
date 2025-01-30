@@ -2,8 +2,8 @@ name: Update Graduation Countdown
 
 on:
   schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch: 
+    - cron: "0 0 * * *"  # Runs daily at midnight UTC
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   update-readme:
@@ -22,11 +22,7 @@ jobs:
       - name: Update README
         run: |
           # Ensure the placeholder exists before replacing
-          if grep -q "🗓️ [0-9]\+ Days Left" README.md; then
-            sed -i "s/🗓️ [0-9]\+ Days Left/🗓️ $DAYS_LEFT Days Left/" README.md
-          else
-            echo "**⏳ Countdown to Graduation**: \n🗓️ $DAYS_LEFT Days Left" >> README.md
-          fi
+          sed -i "s/🗓️ XX Days Left/🗓️ $DAYS_LEFT Days Left/g" README.md
 
       - name: Commit and push changes
         env:

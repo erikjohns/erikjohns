@@ -26,6 +26,7 @@ Want to get in touch or view any of my private repositiories? Let me know!
 
 - 🌐 Check out my portfolio [erikjohns.com](https://www.erikjohns.com)!
 - 📧 Email me at erikj3520@gmail.com!
+- 🖇️ LinkedIn: [Erik Johns](https://www.linkedin.com/in/erik-johns/)
 
 
 <!--

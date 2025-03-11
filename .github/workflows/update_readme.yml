@@ -2,8 +2,8 @@ name: Update Graduation Countdown
 
 on:
   schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch: 
+    - cron: "0 0 * * *"  # Runs daily at midnight UTC
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   update-readme:
@@ -15,20 +15,32 @@ jobs:
       - name: Calculate days until graduation
         run: |
           GRAD_DATE="2025-05-09"
+          TODAY=$(date -u +%Y-%m-%d)
           DAYS_LEFT=$(( ($(date -d "$GRAD_DATE" +%s) - $(date -u +%s)) / 86400 ))
+          echo "Today: $TODAY"
+          echo "Graduation Date: $GRAD_DATE"
+          echo "Epoch Today: $(date -u +%s)"
+          echo "Epoch Grad Date: $(date -d "$GRAD_DATE" +%s)"
+          echo "Days Left: $DAYS_LEFT"
           echo "DAYS_LEFT=$DAYS_LEFT" >> $GITHUB_ENV
 
       - name: Update README
         run: |
           sed -i "s/🗓️ [0-9]\+ Days Left/🗓️ $DAYS_LEFT Days Left/g" README.md
+          echo "Updated README content:"
+          cat README.md | grep "Days Left"
+
+      - name: Debug Git Changes
+        run: |
+          git status
+          git diff README.md
 
       - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git diff --quiet && exit 0
+          git diff --quiet && echo "No changes to commit" && exit 0
           git commit -m "Update graduation countdown ($DAYS_LEFT Days Left)"
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
+          git push origin main
+
